@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="./assets/Css/myProject.css">
+    <title>ADD MY PROJECT</title>
+</head>
+<body>
+
+ 
+<nav style="margin-top: 10px;">
+    <ul style="display: flex; align-items: center; justify-content: space-between; padding: 15px; margin: auto; background-color:  #fcf4f4; ">
+        <div style="display: flex; align-items: center; gap: 50px;">
+            <img style="width: 40px; margin-left: 20px;" src="./assets/Image/download.png" alt="Logo">
+            <a href="index.html" class="nav-profile" style="font-size: 20px; color: black; text-decoration: none;">Home</a>
+            <a href="myProject.html"  class="nav-profile" style="font-size: 20px; color: black; font-weight: bold; text-decoration: none;">My Project</a>
+        </div>
+            <a href="contact.html" style="padding: 5px; width: 100px; border-radius: 5px; background-color: black; color: white; text-align: center; text-decoration: none;">Contact Me
+            </a>
+    </ul>
+</nav>
+   
+
+
+
+    
+<div action="" style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: px; margin-top: 10px;">
+   
+<h1>ADD MY PROJECT</h1>
+
+    <label for="" class="title-form">Project Name</label>
+        <input type="text" class="input-style" id="inputName"></input>
+   
+    <!-- INPUT DATE -->
+    <div style="display: flex; flex-direction: row; gap: 5px;">
+        <div style="display: flex; flex-direction: column;">
+         <label for="" style="font-weight: bold;">Start Date</label>
+         <input type="date" class="input-date" id="startDate"></input>
+        </div>
+        <div style="display: flex; flex-direction: column;">
+        <label for="" style="font-weight: bold;">End Date</label>
+    <input type="date" class="input-date" id="endDate"></input>
+</div>
+   </div>
+          <label for="" class="title-form">Description</label>
+    <textarea type="text" style="height: 100px; width: 312px; border-radius: 3px;border: 1px solid  #e9dede;
+    box-shadow: 1px 2px 10px  #e9dede; outline: none; margin-bottom:15px; resize: none; " id="inputDescription"></textarea>
+
+    <!-- CHECK BOX -->
+         <label for="" class="title-form" style="margin-bottom: 10px;">Technologies</label>  
+         <div style="display: flex; flex-direction: row; width: 320px; margin-bottom: 10px;">
+    <input type="checkbox" id="nodeJs" name="tech"></input>
+           <span>Node Js</span>
+    <input type="checkbox" id="nextJs" name="tech" style="margin-left: 51px;">
+            <span>Next Js</span>
+        </div>
+        <div style="display: flex; flex-direction: row; width: 320px; margin-bottom: 15px;">
+    <input type="checkbox" id="reactJs" name="tech">
+             <span >React Js</span>
+    <input type="checkbox" id="phython" name="tech" style="margin-left: 50px;">
+            <span>Phython</span>
+        </div>
+
+    <!-- INPUT IMAGE -->
+            <label for="" class="title-form">Upload Image</label>
+            <label class="input-img">
+                <p type="file" style="border: solid 1px #9999; border-radius: 2px; background-color: #9999; padding: 4px; color: rgb(114, 112, 112);" >Choose</p>
+                <img style="width: 20px;" src="./assets/Icons/attach-file.png" alt="file">
+                <input type="file" id="inputImage">
+            </label>
+            <button style="background-color: rgb(12, 20, 34); color: white; margin-top: 20px; border: rgb(36, 35, 35); width: 80px; padding: 1.8px; margin-left: 240px; border-radius: 10px;" onclick="submitData()">submit</button>
+</div>
+
+
+ <!-- NEW PROJECT -->
+
+<div style="background-color: white;" >
+    <hr style="margin-top: 100px; background-color: white; border: none;">
+    
+    <h1 style="font-size: 20px; margin-bottom: 30px; display: flex; justify-content: center; align-items: center;">MY PROJECT</h1>
+
+    <div id="contens" style="display: flex; flex-direction: row; justify-content: center; align-items: center;gap: 20px; width: 100%;">
+        <!-- <div style="border: solid 1px white; box-shadow: 0px  5px 3px #999; width:300px;">
+            <img style="margin-left: 12px; margin-top: 10px; border-radius: 7px; width: 275px; height: 160px;" src="" alt="" >
+                <p class="text-style" style="font-weight: bold;">Dumbways Mobile App - 2024</p>
+                <p class="text-style">durasi 3 bulan</p>
+                <p class="text-style">Lorem ipsum dolor sit amet consectetur adipisicins iste delectus officia vel.</p>
+<div style="display: flex; flex-direction: row; gap: 20px; margin-left: 15px; margin-bottom: 10px;">
+    <i class="fa-brands fa-google-play"></i>
+    <i class="fa-solid fa-robot"></i>
+    <i class="fa-brands fa-java"></i>
+</div style="display: flex; flex-direction: row; gap: 10px;">
+    <button class="button-style"  style="margin-left: 15px;">edit</button>
+    <button class="button-style" onclick="deleteData()" style="margin-bottom: 10px;">delete</button>
+</div>
+</div> -->
+
+<script src="./assets/myProject.js"></script>
+
+</body>
+</html>

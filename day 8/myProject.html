@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="./assets/Css/myProject.css">
+    <title>ADD MY PROJECT</title>
+</head>
+<body>
+
+ 
+    <nav class="navbar" >
+        <ul>
+            <div class="nav-menu">
+                <img src="./assets/Image/download.png" alt="Logo">
+                <a href="index.html" class="nav-link collapse">Home</a>
+                <a href="myProject.html" class="nav-link collapse" style="font-weight: bold;">My Project</a>
+                <a href="testimonial.html" class="nav-link collapse">Testimonials</a>
+            </div>
+                <a class="btn-contact collapse" href="contact.html">Contact Me</a>
+                <i class="fa-solid fa-bars fa-2x" onclick="humbergerMenu()" id="btn-humberger"></i>
+            </ul>
+    </nav>
+
+
+       
+    <div id="humbergerNavContainer">
+        <div class="container-humberger">
+            <a href="index.html" class="humberger-link" >Home</a>
+            <a href="contact.html" class="humberger-link">Contact Me</a>
+            <a href="testimonial.html" class="humberger-link">Testimonials</a>
+        </div>
+    </div>
+    
+    
+<div class="container" action="">
+   
+     <h1>Add My Project</h1>
+
+    <label for="" class="title-form">Project Name</label>
+        <input  class="input-style" type="text" id="inputName"></input>
+   
+    <!-- INPUT DATE -->
+    <div class="styled-date-input">
+        <div class="date-style" >
+         <label for="startDate" class="label-date" >Start Date</label>
+         <input type="date" class="input-date" id="startDate"></input>
+        </div>
+        <div class="date-style">
+        <label for="endDate" class="label-date">End Date</label>
+    <input type="date" class="input-date" id="endDate"></input>
+</div>
+   </div>
+          <label for="" class="title-form">Description</label>
+    <textarea type="text"  id="inputDescription"></textarea>
+
+    <!-- CHECK BOX -->
+         <label for="" class="tech" >Technologies</label>  
+         <div class="checkbox-container" >
+    <input type="checkbox" id="nodeJs" name="tech"></input>
+           <span>Node Js</span>
+    <input class="check-nj" type="checkbox" id="nextJs" name="tech">
+            <span>Next Js</span>
+        </div>
+        <div class="checkbox-container">
+    <input type="checkbox" id="reactJs" name="tech">
+             <span >React Js</span>
+    <input class="check-phy" type="checkbox" id="phython" name="tech">
+            <span>Phython</span>
+        </div>
+
+    <!-- INPUT IMAGE -->
+            <label for="" class="title-form">Upload Image</label>
+            <label class="input-img">
+                <p class="custom-image" type="file">Choose</p>
+                <img class="file-icon" src="./assets/Icons/attach-file.png" alt="file">
+                <input type="file" id="inputImage">
+            </label>
+            <button class="button-primary" onclick="submitData()">submit</button>
+</div>
+
+
+ <!-- NEW PROJECT -->
+
+
+ 
+<div class="new-project"  >
+    <hr>
+    
+    <h1>MY PROJECT</h1>
+
+    <div class="html-content" id="contens">
+
+
+   
+     
+<script src="./assets/Js/myProject.js"></script>
+<script src="./assets/Js/humberger.js"></script>
+</body>
+</html>

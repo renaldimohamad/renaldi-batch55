@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./assets/Css/testimonial.css">
+    <title>My Testimonial</title>
+</head>
+<body>
+
+    <nav class="navbar" >
+        <ul>
+            <div class="nav-menu">
+                <img src="./assets/Image/download.png" alt="Logo">
+                <a href="index.html" class="nav-link collapse" >Home</a>
+                <a href="myProject.html" class="nav-link collapse" >My Project</a>
+                <a href="testimonial.html" class="nav-link collapse" style="font-weight: bold;">Testimonials</a>
+            </div>
+                <a class="btn-contact collapse" href="contact.html">Contact Me</a>
+
+                <i class="fa-solid fa-bars fa-2x" onclick="humbergerMenu()" id="btn-humberger"></i>
+        </ul>
+    </nav>
+
+  <!-- HUMBERGER  -->
+        
+  <div id="humbergerNavContainer">
+    <div class="container-humberger">
+        <a href="index.html" class="humberger-link" >Home</a>
+        <a href="myProject.html" class="humberger-link" >My Project</a>
+        <a href="contact.html" class="humberger-link">Contact Me</a>
+    </div>
+</div>
+
+
+<div class="testimonials">
+
+    <div style="display: flex; flex-direction: column;">
+    <h1>My Testimonials</h1>
+
+    <h2 >Rating By Name</h2>
+<div style="display: flex; flex-direction: row; gap: 20px; margin-bottom: 10px;">
+    <button class="rating" onclick="allTestimonial()">All</button>
+    <button class="rating">1 <i class="fa-solid fa-star" onclick="filterTestimonial(1)"></i></button>
+    <button class="rating">2 <i class="fa-solid fa-star" onclick="filterTestimonial(2)"></i></button>
+    <button class="rating">3 <i class="fa-solid fa-star" onclick="filterTestimonial(3)"></i></button>
+    <button class="rating">4 <i class="fa-solid fa-star" onclick="filterTestimonial(4)"></i></button>
+    <button class="rating">5 <i class="fa-solid fa-star" onclick="filterTestimonial(5)"></i></button>
+</div>
+</div>
+
+
+
+</div>
+    <div class="container"  id="testimonials">
+        <!-- <div class="container-card">
+        <img src="./assets/Image/images.jpg" alt="">
+        <p class="content">"Lorem Ipsum"</p>
+        <p class="author">- Surya Elidanto</p>
+        <p class="review-rating">1<i class="fa-solid fa-star"></i>
+        </div>
+    </div> -->
+
+    <script src="./assets/Js/humberger.js"></script>
+    <script src="./assets/Js/testimonial.js"></script>
+
+</body>
+</html>

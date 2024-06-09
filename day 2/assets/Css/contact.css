@@ -1,0 +1,22 @@
+body {
+    background-color:  #e2e2e2;
+}
+
+.nav-profile :hover {
+    color: orangered;
+}
+
+.input-style {
+    width: 300px;
+    padding: 7px;
+    border: 1px solid  #e9dede;
+    box-shadow: 1px 2px 10px  #e9dede;
+   outline: blue;
+   margin-bottom: 15px;
+  
+}
+
+.title-form {
+    width: 315px;
+    font-weight: bold;
+}

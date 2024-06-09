@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./assets/Css/contact.css">
+    <title>GET IN TOUCH!</title>
+</head>
+<body>
+    
+    <nav class="navbar" >
+        <ul>
+            <div class="nav-menu">
+                <img src="./assets/Image/download.png" alt="Logo">
+                <a href="index.html" class="nav-link collapse" >Home</a>
+                <a href="myProject.html" class="nav-link collapse" >My Project</a>
+                <a href="testimonial.html" class="nav-link collapse">Testimonials</a>
+            </div>
+                <a class="btn-contact collapse" href="contact.html">Contact Me</a>
+
+                <i class="fa-solid fa-bars fa-2x" onclick="humbergerMenu()" id="btn-humberger"></i>
+        </ul>
+    </nav>
+
+
+        <!-- HUMBERGER  -->
+        
+        <div id="humbergerNavContainer">
+    <div class="container-humberger">
+        <a href="index.html" class="humberger-link" >Home</a>
+        <a href="myProject.html" class="humberger-link" >My Project</a>
+        <a href="testimonial.html" class="humberger-link">Testimonials</a>
+    </div>
+</div>
+
+
+
+<div class="container" action="" >
+        <h1> GET IN TOUCH </h1>
+        <label for="" class="title-form" >Name</label>
+        <input  class="input-style" type="text" id="inputName" ></input>
+        <label for="" class="title-form">Email</label>
+        <input class="input-style" type="text" id="inputEmail"></input>
+        <label for="" class="title-form">Phone Number</label>
+        <input class="input-style" type="text" id="inputNumber"></input>
+        <label for="" class="title-form">Subject</label>
+        <select type="text" id="inputSubject">
+            <option></option>
+            <option>Frontend</option>
+            <option>Beckend Devoloper</option>
+            <option>Fullstack Devoloper</option>
+        </select>
+        <label for="" class="title-form" >Your Message</label>
+        <textarea id="inputDescription"  class="input-style"  name="" id=""></textarea>
+       
+        <button type="submit" class="btn-primary" onclick="submitData()">Submit</button>
+  
+    </div>
+
+
+<script src="./assets/Js/contact.js"></script>
+<script src="./assets/Js/humberger.js"></script>
+
+</body>
+</html>

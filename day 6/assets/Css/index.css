@@ -1,0 +1,262 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+* {
+   text-decoration: none;
+   font-family: 'poppins', sans-serif;
+}
+
+body {
+   background-color:  #e2e2e2;
+}
+
+ /* NAVIGATION */
+
+ .navbar {
+    margin-bottom: 50px; 
+    margin-top: 10px;
+ }
+
+ .navbar ul {
+   display: flex; 
+   align-items: center; 
+   justify-content: space-between; 
+   padding: 15px; 
+   margin: auto; 
+   background-color: #f5f3f3; 
+ }
+
+ .nav-menu {
+   display: flex; 
+   align-items: center; 
+   gap: 40px;
+ }
+
+ .nav-menu img {
+   width: 40px; 
+   margin-left: 20px;
+ }
+
+.nav-home {
+   font-size: 18px; 
+   color: black; 
+   text-decoration: none; 
+   font-weight: bold;
+}
+
+.nav-project {
+   font-size: 18px; 
+   color: black; 
+   text-decoration: none;
+}
+
+.btn-contact {
+   padding: 4px; 
+   font-size: 14px;
+   width: 100px; 
+   border-radius: 5px; 
+   background-color: black; 
+   color: white; 
+   text-align: center; 
+   text-decoration: none;
+}
+
+/* BOX CONTENT */
+
+.box-container {
+   border: solid 1px white;
+   background-color: white;
+   border-radius: 10px; box-shadow:  #9999 10px 20px 18px; 
+   width: 85%; 
+   margin-left: 100px; 
+}
+
+.box-container h1 {
+   font-size: 18px;
+   font-weight: bold;
+}
+
+.box-container p {
+   line-height: 1.9; 
+   text-align: justify; 
+   font-size: 13px;
+}
+
+.card {
+   width: 55%;
+   margin: auto;
+   margin-top: 30px;
+}
+
+.card-content {
+   display: flex;
+   flex-direction: row;
+   gap: 50px;
+}
+
+.modal-body {
+   display: flex; 
+   flex-direction: column;
+}
+
+.button-secondary {
+   display: flex; 
+   flex-direction: row;
+   gap: 3px; 
+   align-items: center;   
+  
+}
+
+.button-primary {
+   text-decoration: none; 
+   font-size: 11px;
+   text-align: center;
+   width: 85px; 
+   background-color: black; 
+   color: white; 
+   border-radius: 7px; 
+   padding: 1.5px;
+}
+
+.button-secondary p {
+   font-weight: bold; 
+   font-size: 13px;
+   margin-left: 20px;
+}
+
+.button-secondary img {
+   width: 20px; 
+   height: 20px;
+}
+
+.footer {
+   display: flex;  
+   align-items: center;
+   flex-direction: row;
+   gap: 15px; 
+   margin-top: 20px;
+}
+
+.footer img {
+   width: 20px;
+}
+
+.card-profile {
+   display: flex; 
+   flex-direction: column; 
+   border: solid 1px #9999; 
+   border-radius: 5px;
+   box-shadow: 0px 8px 10px #9999; 
+   height: 310px; 
+   margin-bottom: 50px;
+}
+
+.card-profile img {
+   width: 170px; 
+   height: 300px;
+  
+}
+
+.creators {
+   display: flex; 
+   flex-direction: column;
+}
+
+.author {
+   margin-top: 5px;
+   font-size: 15px;
+   font-weight: bold;
+   margin-left: 15px;
+}
+
+.career-pathfinder {
+   font-size: 10px;
+   margin-bottom: 30px;
+   margin-left: 35px;
+}
+
+
+   /* HUMBERGER */
+
+   
+#humbergerNavContainer {
+   display: none;
+   margin-bottom: 50px;
+   background-color:  #c2bfbf;
+}
+
+.container-humberger a {
+   display: flex; 
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   color: black;
+   font-weight: bold;
+   width: 100px;
+   margin-left: 37%;
+   margin-bottom: 10px;
+
+}
+
+.container-humberger a:hover {
+   background-color: rgb(12, 20, 34); 
+   padding: 4px;
+   color: white;
+   border-radius: 5px;
+   font-weight: normal;
+}
+
+#btn-humberger {
+   display: none;
+}
+
+
+@media only screen and (max-width: 500px) {
+   .navbar {
+      margin-bottom: 20px;
+   }
+   .collapse {
+      display: none;
+   }
+
+   #btn-humberger {
+      display: block;
+   }
+
+
+   .box-container {
+     margin: 0px 8% 50%;
+   }
+
+   .box-container h1 {
+      font-size: 15px;
+   }
+
+   .box-container p {
+      line-height: 1.9; 
+      text-align: justify; 
+      font-size: 11px;
+   }
+
+   .card-content {
+      display: flex; 
+      flex-direction: column;
+   }
+
+   .button-primary {
+      padding: 1px;
+      width: 30%;
+   }
+
+   .button-secondary p {
+      font-size: 10px;   
+   }
+
+   .footer {
+      justify-content: center;
+   }
+   
+   .card-profile {
+      width: 170px;
+      margin: 0px 10% 30%;
+   }
+}
