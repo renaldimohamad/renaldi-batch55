@@ -1,8 +1,8 @@
 const express = require("express");
-const { sequelize, QueryTypes } = require("sequelize");
+const { Sequelize, QueryTypes } = require("sequelize");
 
-const sequelize = new sequelize(config.development);
 const config = require("./config/config.json");
+const sequelize = new Sequelize(config.development);
 
 const path = require("path");
 const { type } = require("os");
@@ -33,7 +33,6 @@ function home(req, res) {
 }
 async function myProject(req, res) {
   const query = `SELECT * FROM "Blogs"`;
-
   const obj = await sequelize.query(query, { type: QueryTypes.SELECT });
 
   res.render("myProject", { data: obj });
