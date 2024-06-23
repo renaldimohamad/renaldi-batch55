@@ -8,6 +8,8 @@ app.set("views", path.join(__dirname, "src/views"));
 
 // ini untuk assets
 app.use("/assets", express.static(path.join(__dirname, "src/assets")));
+
+//midleware
 app.use(express.urlencoded({ extended: false }));
 
 app.get("/", home);

@@ -61,7 +61,6 @@
           ADD MY PROJECT
         </h2>
         <div class="col-md-5">
-          {{! methot post menandahkan bahwa dia mengirim data baru }}
           <form action="/addProject" method="post">
             <div class="mb-3">
               <label
@@ -73,6 +72,7 @@
                 class="form-control custom-input"
                 style="outline: white"
                 id="inputName"
+                name="title"
               />
             </div>
 
@@ -117,6 +117,7 @@
                 class="form-control custom-input"
                 style="resize: none"
                 id="inputDescription"
+                name="content"
                 rows="3"
               ></textarea>
             </div>

@@ -1,0 +1,20 @@
+SEQUELIZE 
+- npm i sequelize
+
+SEQUELIZE  CLI
+- npx sequelize-cli
+
+CREATING THE FIRST MODEL (AND Migration)
+- npx sequelize-cli model:generate --name User --attributes firstName:string,lastName:string,email:string
+- user
+- firstName:string
+- lastName:string
+
+
+WRITING A MIGRATION
+- 
+
+RUNNING MIGRATION
+- npx sequelize-cli db:migrate
+
+const { sequelize, QueriTypes } = require('sequelize');
