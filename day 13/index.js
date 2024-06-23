@@ -1,7 +1,11 @@
 const express = require("express");
-const { sequelize } = require("sequelize");
+const { sequelize, QueryTypes } = require("sequelize");
+
+const sequelize = new sequelize(config.development);
+const config = require("./config/config.json");
 
 const path = require("path");
+const { type } = require("os");
 const app = express();
 const port = 5000;
 
@@ -27,8 +31,12 @@ app.get("/contact", contact);
 function home(req, res) {
   res.render("index");
 }
-function myProject(req, res) {
-  res.render("myProject", { data });
+async function myProject(req, res) {
+  const query = `SELECT * FROM "Blogs"`;
+
+  const obj = await sequelize.query(query, { type: QueryTypes.SELECT });
+
+  res.render("myProject", { data: obj });
 }
 function viewproject(req, res) {
   res.render("addProject");
