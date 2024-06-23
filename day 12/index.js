@@ -139,7 +139,14 @@ function detailProject(req, res) {
 }
 
 function testimonial(req, res) {
-  res.render("testimonial", { testimonials });
+  const rating = parseInt(req.query.rating);
+  let filteredTestimonials = testimonials;
+
+  if (rating) {
+    filteredTestimonials = testimonials.filter((t) => t.ratting === rating);
+  }
+
+  res.render("testimonial", { testimonials: filteredTestimonials });
 }
 function contact(req, res) {
   res.render("contact");

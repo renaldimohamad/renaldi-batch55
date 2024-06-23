@@ -71,16 +71,19 @@
         <h3>Rating By Star</h3>
 
         <div class="d-flex gap-3">
-          <button class="btn btn-dark">All</button>
-          <button class="btn btn-dark">1
+          <button
+            class="btn btn-dark"
+            onclick="filterTestimonial()"
+          >All</button>
+          <button class="btn btn-dark" onclick="filterTestimonial(1)">1
             <i class="fa-solid fa-star"></i></button>
-          <button class="btn btn-dark">2
+          <button class="btn btn-dark" onclick="filterTestimonial(2)">2
             <i class="fa-solid fa-star"></i></button>
-          <button class="btn btn-dark">3
+          <button class="btn btn-dark" onclick="filterTestimonial(3)">3
             <i class="fa-solid fa-star"></i></button>
-          <button class="btn btn-dark">4
+          <button class="btn btn-dark" onclick="filterTestimonial(4)">4
             <i class="fa-solid fa-star"></i></button>
-          <button class="btn btn-dark">5
+          <button class="btn btn-dark" onclick="filterTestimonial(5)">5
             <i class="fa-solid fa-star"></i></button>
         </div>
       </div>
@@ -111,5 +114,10 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+    <script>
+      function filterTestimonial(rating = false) { let url = '/testimonial'; if
+      (rating) { url = `${url}?rating=${rating}` }; window.location.href = url;
+      }
+    </script>
   </body>
 </html>
