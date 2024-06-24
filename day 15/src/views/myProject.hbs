@@ -70,82 +70,92 @@
       {{! CARD }}
 
       <div class="container d-flex gap-4 px-5" style="flex-wrap: wrap;">
-        {{#each data}}
+        {{#if data.length}}
+          {{#each data}}
+            <div class="">
 
-          <div class="">
-
-            <div class="col d-flex gap-5">
-              <div class="card border border-0 shadow-lg" style="width: 18rem">
-                <div class="container">
-                  <img
-                    src="./assets/Image/images.jpg"
-                    class="rounded"
-                    alt="..."
-                    style="width: 100%; margin-top: 10px"
-                  />
-                </div>
-                <a
-                  href="/detailProject/{{@index}}"
-                  target="_blank"
-                  {{this.title}}
-                  class="card-body p-2 container"
-                  style="text-decoration: none;"
+              <div class="col d-flex gap-5">
+                <div
+                  class="card border border-0 shadow-lg"
+                  style="width: 18rem"
                 >
-                  <h5 class="mb-0">{{this.title}}</h5>
-                  <p>{{@index}}
-                    |
-                    <span id="time">{{this.createdAt}} |</span>
-                    bulan</p>
-                  <p class="lh-1.1" style="font-size: 13px">
-                    {{this.content}}
-                  </p>
-                </a>
+                  <div class="container">
+                    <img
+                      src="./assets/Image/images.jpg"
+                      class="rounded"
+                      alt="project-item-image"
+                      style="width: 100%; margin-top: 10px"
+                    />
+                  </div>
+                  <a
+                    href="/detailProject/{{this.id}}"
+                    target="_blank"
+                    {{this.title}}
+                    class="card-body p-2 container"
+                    style="text-decoration: none;"
+                  >
+                    <h5 class="mb-0">{{this.title}}</h5>
+                    <p>{{this.id}}
+                      |
+                      <span id="time">{{this.createdAt}} |</span>
+                      bulan</p>
+                    <p class="lh-1.1" style="font-size: 13px">
+                      {{this.content}}
+                    </p>
+                  </a>
 
-                <!-- Icons -->
+                  <!-- Icons -->
 
-                <div class="container mb-3">
-                  <div class="d-flex gap-3">
-                    <i class="fa-brands fa-google-play"></i>
-                    <i class="fa-brands fa-android"></i>
-                    <i class="fa-brands fa-java"></i>
+                  <div class="container mb-3">
+                    <div class="d-flex gap-3">
+                      <i class="fa-brands fa-google-play"></i>
+                      <i class="fa-brands fa-android"></i>
+                      <i class="fa-brands fa-java"></i>
+                    </div>
+                  </div>
+
+                  <!-- Button -->
+
+                  <div class="container">
+                    <div class="d-flex gap-2">
+                      <form action="" method="GET">
+                        <button
+                          type="submit"
+                          class="btn btn-dark"
+                          style="
+                          --bs-btn-padding-x: 3rem;
+                          --bs-btn-font-size: 0.75rem;
+                        "
+                        >
+                          edit
+                        </button>
+                      </form>
+
+                      <form action="/deleteProject/{{this.id}}" method="POST">
+                        <button
+                          type="submit"
+                          class="btn btn-dark"
+                          style="
+
+                          --bs-btn-padding-x: 2.5rem;
+                          --bs-btn-font-size: 0.75rem;
+                        "
+                        >
+                          delete
+                        </button>
+                      </form>
+                    </div>
                   </div>
                 </div>
 
-                <!-- Button -->
-
-                <div class="container mb-3">
-                  <div class="d-flex gap-2">
-                    <button
-                      type="button"
-                      class="btn btn-dark"
-                      style="
-                    --bs-btn-padding-y: 0rem;
-                    --bs-btn-padding-x: 3rem;
-                    --bs-btn-font-size: 0.75rem;
-                  "
-                    >
-                      edit
-                    </button>
-
-                    <button
-                      type="button"
-                      class="btn btn-dark"
-                      style="
-                    --bs-btn-padding-y: 0rem;
-                    --bs-btn-padding-x: 2.5rem;
-                    --bs-btn-font-size: 0.7rem;
-                  "
-                    >
-                      delete
-                    </button>
-                  </div>
-                </div>
               </div>
 
             </div>
+          {{/each}}
 
-          </div>
-        {{/each}}
+        {{else}}
+          <h2 class="text-center flex-fill mt-5">No Data</h2>
+        {{/if}}
       </div>
     </div>
 
