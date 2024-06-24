@@ -130,7 +130,7 @@ async function editProjectView(req, res) {
   const query = `SELECT * FROM "Blogs" WHERE id=${id}`;
   const obj = await sequelize.query(query, { type: QueryTypes.SELECT });
 
-  res.render("updateProject", { data: obj[0] }); // obj[0] data array pertama
+  res.render("editProject", { data: obj[0] }); // obj[0] data array pertama
 }
 
 // UPDATE PROJECT
@@ -141,7 +141,7 @@ async function updateProject(req, res) {
   const date = new Date();
   const dateString = date.toISOString().slice(0, 19).replace("T", " ");
 
-  const query = `UPDATE "Blogs" SET title='${title}', content='${content}', "updatedAt"='${dateString} WHERE id=${id}'`;
+  const query = `UPDATE "Blogs" SET title='${title}', content='${content}', "updatedAt"='${dateString}' WHERE id='${id}'`;
   await sequelize.query(query, { type: QueryTypes.UPDATE });
   res.redirect("/myProject");
 }
