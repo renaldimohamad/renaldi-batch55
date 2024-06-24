@@ -93,6 +93,7 @@ app.get("/contact", contact);
 function home(req, res) {
   res.render("index");
 }
+
 async function myProject(req, res) {
   const query = `SELECT * FROM "Blogs"`;
   const obj = await sequelize.query(query, { type: QueryTypes.SELECT });
