@@ -17,20 +17,17 @@
       referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="./assets/Css/index.css" />
-    <!-- <link rel="stylesheet" href="./assets/Css/contact.css" /> -->
   </head>
   <body>
-    <nav
-      class="navbar navbar-expand-lg"
-      style="background-color: #f5f3f3; margin-top: 5px"
-    >
+    <nav class="navbar navbar-expand-lg" style="background-color: #f5f3f3;">
       <div class="container-fluid">
-        <img
-          class="me-3"
-          src="./assets/Image/download.png"
-          style="width: 40px; margin-left: 2rem"
-          alt=""
-        />
+        <a href="/">
+          <img
+            src="./assets/Image/download.png"
+            style="width: 40px; margin-right: 12px; margin-left: 30px"
+            alt="logo"
+          />
+        </a>
         <a
           href="contact.html"
           class="navbar-toggler"
@@ -44,31 +41,33 @@
           <span class="navbar-toggler-icon"></span>
         </a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link nav-item me-2 fw-bold" href="/">Home</a>
+              <a class="nav-link fw-bold" href="/">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link nav-item me-2" href="/myProject">Add Projoect</a>
+              <a class="nav-link" href="/addProject">Add Projoect</a>
             </li>
             <li class="nav-item">
-              <a
-                class="nav-link nav-item me-2"
-                href="/testimonial"
-              >Testimonials</a>
+              <a class="nav-link" href="/testimonial">Testimonials</a>
             </li>
           </ul>
 
           {{#if isLogin}}
-            <p
-              class="nav-link nav-item me-3 fw-semibold lh-1 fst-italic mb-0"
-            >Welcome,
-              {{user.name}}</p>
-            <a href="/logout" class="me-3">Logout</a>
-
+            <div class="d-flex align-items-center mb-lg-0 mb-3">
+              <p
+                class="nav-link nav-item me-2 fw-semibold lh-1 fst-italic mb-0"
+              >Welcome,
+                {{user.name}}</p>
+              <a
+                href="/logout"
+                class="me-4 link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+              >Logout</a>
+            </div>
           {{/if}}
+
           <a href="/contact">
-            <button class="btn btn-dark text-light me-4" type="submit">
+            <button class="btn btn-dark text-light" type="button">
               Contact Me
             </button>
           </a>
@@ -77,11 +76,12 @@
     </nav>
 
     <!-- Section 1 - bg abu -->
+
     <div class="container" style="margin-top: 85px; margin-bottom: 80px">
       <div class="card p-3 border border-0 shadow-lg">
         <div class="card-body">
-          <div class="row gap-5">
-            <div class="col-md-8 d-flex flex-column gap-2">
+          <div class="row">
+            <div class="col-lg-8 d-flex flex-column gap-2">
               <div>
                 <h1 class="fw-bold fs-3">Hi Welcome to my hut</h1>
                 <p class="lh-1.1" style="text-align: justify">
@@ -149,13 +149,12 @@
 
             <!-- Card Image -->
 
-            <div class="col">
-              <div class="card border border-0 shadow-lg" style="width: 16rem">
+            <div class="col-lg-4 p-4">
+              <div class="card border border-0 shadow-lg">
                 <img
                   src="./assets/Image/image4.jpg"
                   class="rounded-top"
-                  alt="..."
-                  style="height: 16rem; width: 16rem"
+                  alt="profile-image"
                 />
                 <div class="card-body p-2 text-center">
                   <h1 class="card-title fs-6 fw-bold mb-0">Renaldi Mohamad</h1>
@@ -165,8 +164,6 @@
                 </div>
               </div>
             </div>
-
-            <!-- Section 2 - bg putih -->
           </div>
         </div>
       </div>
@@ -175,191 +172,93 @@
     <!-- Section 2 - bg white -->
 
     <div class="bg-light p-5">
+      <hr class="border border-0" />
       <h1 class="fw-bold fs-5 text-center mb-5">MY PROJECT</h1>
-      {{! <hr class="border border-secondary" /> }}
 
       <!-- card -->
 
       <div class="container">
-        <div class="col d-flex gap-5" style="flex-wrap: wrap">
-          <div class="card border border-0 shadow-lg" style="width: 18rem">
-            <div class="container">
-              <img
-                src="./assets/Image/images.jpg"
-                class="rounded"
-                alt="..."
-                style="width: 100%; margin-top: 10px"
-              />
-            </div>
-            <div class="card-body p-2 container">
-              <h5 class="mb-0">Dumbways Mobile App</h5>
-              <p>Durasi: 3 bulan</p>
-              <p class="lh-1.1" style="font-size: 13px">
-                App that used for dumbways student, it was deployed and can
-                downloaded on playstore. Happy Download
-              </p>
-            </div>
+        <div class="d-flex flex-wrap justify-content-center gap-3">
+          {{#each projects}}
+            <a
+              href="/detailProject/{{this.id}}"
+              class="text-decoration-none text-color text-body"
+            >
+              <div class="card border border-0 shadow-lg" style="width: 18rem">
+                <div class="container">
+                  <img
+                    src="./assets/Image/{{this.image}}"
+                    class="rounded"
+                    alt="project-image"
+                    style="width: 100%; margin-top: 12px;"
+                  />
+                </div>
+                <div class="card-body container" style="padding: 12px">
+                  <h5 class="mb-0">{{this.name}}</h5>
+                  <p class="text-secondary" style="font-size: 14px;">Durasi:
+                    {{this.duration}}
+                    bulan</p>
+                  <p class="lh-1.1" style="font-size: 14px">
+                    {{this.description}}
+                  </p>
 
-            <!-- Icons -->
+                  <!-- Icons -->
 
-            <div class="container mb-3">
-              <div class="d-flex gap-3">
-                <i class="fa-brands fa-google-play"></i>
-                <i class="fa-brands fa-android"></i>
-                <i class="fa-brands fa-java"></i>
+                  <div class="d-flex gap-3">
+                    {{#if this.technologies.length}}
+                      {{#each this.technologies}}
+                        <img
+                          src="./assets/Icons/{{this}}-icon.png"
+                          alt="tech-icon"
+                          style="width: 22px; height: 22px;"
+                        />
+                      {{/each}}
+                    {{else}}
+                      <span>-</span>
+                    {{/if}}
+                  </div>
+                </div>
+
+                <!-- Button -->
+
+                <div class="container" style="padding: 12px;">
+                  <div class="d-flex gap-2">
+                    <a href="/editProject/{{this.id}}">
+                      <button
+                        type="button"
+                        class="btn btn-dark"
+                        style="
+                        --bs-btn-padding-y: 0.2rem;
+                        --bs-btn-padding-x: 3rem;
+                        --bs-btn-font-size: 0.75rem;
+                      "
+                      >
+                        edit
+                      </button>
+                    </a>
+                    <form
+                      class="mb-0"
+                      action="/deleteProject/{{this.id}}"
+                      method="post"
+                    >
+                      <button
+                        type="submit"
+                        class="btn btn-dark"
+                        style="
+                      --bs-btn-padding-y: 0.2rem;
+                      --bs-btn-padding-x: 3rem;
+                      --bs-btn-font-size: 0.75rem;
+                    "
+                      >
+                        delete
+                      </button>
+                    </form>
+
+                  </div>
+                </div>
               </div>
-            </div>
-
-            <!-- Button -->
-
-            <div class="container mb-3">
-              <div class="d-flex gap-2">
-                <button
-                  type="button"
-                  class="btn btn-dark"
-                  style="
-                    --bs-btn-padding-y: 0.2rem;
-                    --bs-btn-padding-x: 3rem;
-                    --bs-btn-font-size: 0.75rem;
-                  "
-                >
-                  edit
-                </button>
-
-                <button
-                  type="button"
-                  class="btn btn-dark"
-                  style="
-                    --bs-btn-padding-y: 0.2rem;
-                    --bs-btn-padding-x: 3rem;
-                    --bs-btn-font-size: 0.75rem;
-                  "
-                >
-                  delete
-                </button>
-              </div>
-            </div>
-          </div>
-          <!---->
-
-          <!-- Card 2 -->
-          <div class="card border border-0 shadow-lg" style="width: 18rem">
-            <div class="container">
-              <img
-                src="./assets/Image/images.jpg"
-                class="rounded"
-                alt="..."
-                style="width: 100%; margin-top: 10px"
-              />
-            </div>
-            <div class="card-body p-2 container">
-              <h5 class="mb-0">Dumbways Mobile App</h5>
-              <p>Durasi: 3 bulan</p>
-              <p class="lh-1.1" style="font-size: 13px">
-                App that used for dumbways student, it was deployed and can
-                downloaded on playstore. Happy Download
-              </p>
-            </div>
-
-            <!-- Icons -->
-
-            <div class="container mb-3">
-              <div class="d-flex gap-3">
-                <i class="fa-brands fa-google-play"></i>
-                <i class="fa-brands fa-android"></i>
-                <i class="fa-brands fa-java"></i>
-              </div>
-            </div>
-
-            <!-- Button -->
-
-            <div class="container mb-3">
-              <div class="d-flex gap-2">
-                <button
-                  type="button"
-                  class="btn btn-dark"
-                  style="
-                    --bs-btn-padding-y: 0.2rem;
-                    --bs-btn-padding-x: 3rem;
-                    --bs-btn-font-size: 0.75rem;
-                  "
-                >
-                  edit
-                </button>
-
-                <button
-                  type="button"
-                  class="btn btn-dark"
-                  style="
-                    --bs-btn-padding-y: 0.2rem;
-                    --bs-btn-padding-x: 3rem;
-                    --bs-btn-font-size: 0.75rem;
-                  "
-                >
-                  delete
-                </button>
-              </div>
-            </div>
-          </div>
-          <!-- Card 3 -->
-          <div class="card border border-0 shadow-lg" style="width: 18rem">
-            <div class="container">
-              <img
-                src="./assets/Image/images.jpg"
-                class="rounded"
-                alt="..."
-                style="width: 100%; margin-top: 10px"
-              />
-            </div>
-            <div class="card-body p-2 container">
-              <h5 class="mb-0">Dumbways Mobile App</h5>
-              <p>Durasi: 3 bulan</p>
-              <p class="lh-1.1" style="font-size: 13px">
-                App that used for dumbways student, it was deployed and can
-                downloaded on playstore. Happy Download
-              </p>
-            </div>
-
-            <!-- Icons -->
-
-            <div class="container mb-3">
-              <div class="d-flex gap-3">
-                <i class="fa-brands fa-google-play"></i>
-                <i class="fa-brands fa-android"></i>
-                <i class="fa-brands fa-java"></i>
-              </div>
-            </div>
-
-            <!-- Button -->
-
-            <div class="container mb-3">
-              <div class="d-flex gap-2">
-                <button
-                  type="button"
-                  class="btn btn-dark"
-                  style="
-                    --bs-btn-padding-y: 0.2rem;
-                    --bs-btn-padding-x: 3rem;
-                    --bs-btn-font-size: 0.75rem;
-                  "
-                >
-                  edit
-                </button>
-
-                <button
-                  type="button"
-                  class="btn btn-dark"
-                  style="
-                    --bs-btn-padding-y: 0.2rem;
-                    --bs-btn-padding-x: 3rem;
-                    --bs-btn-font-size: 0.75rem;
-                  "
-                >
-                  delete
-                </button>
-              </div>
-            </div>
-          </div>
+            </a>
+          {{/each}}
         </div>
       </div>
     </div>

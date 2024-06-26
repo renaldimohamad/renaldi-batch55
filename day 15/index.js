@@ -7,9 +7,6 @@ const flash = require("express-flash");
 
 const config = require("./config/config.json");
 const sequelize = new Sequelize(config.development);
-const bcrypt = require("bcrypt");
-const session = require("express-session");
-const flash = require("express-flash");
 
 const testimonials = [
   {
@@ -79,6 +76,7 @@ const { type } = require("os");
 const { error } = require("console");
 const { hasSubscribers } = require("diagnostics_channel");
 const { hash } = require("crypto");
+
 const app = express();
 const port = 5000;
 
@@ -103,100 +101,186 @@ app.use(
 );
 
 app.get("/", home);
-app.get("/myProject", myProject);
-app.get("/addProject", viewproject);
-app.post("/addProject", addBlog);
+
+app.get("/addProject", addProjectForm);
+app.post("/addProject", addProject);
+
 app.get("/detailProject/:id", detailProject);
 
-app.get("/updateProject/:id", editProjectView);
+app.get("/editProject/:id", editProjectForm);
 app.post("/updateProject", updateProject);
+
 app.post("/deleteProject/:id", deleteProject);
 
 app.get("/testimonial", testimonial);
+
 app.get("/contact", contact);
 
-app.get("/login", loginView);
+app.get("/login", loginForm);
 app.post("/login", login);
-app.get("/register", registerView);
+
+app.get("/register", registerForm);
 app.post("/register", register);
+
 app.get("/logout", logout);
 
+// fungsi untuk hitung durasi bulan
+function getMonthDuration(startDateStr, endDateStr) {
+  const startMonth = startDateStr.split("-")[1]; // ambil value bulan start
+  const endMonth = endDateStr.split("-")[1]; // ambil value bulan end
+
+  const totalMonth = endMonth - startMonth + 1;
+  return totalMonth;
+}
+
 // HOME
-function home(req, res) {
+
+async function home(req, res) {
   const isLogin = req.session.isLogin;
   const user = req.session.user;
-  res.render("index", { user, isLogin });
-}
 
-// MY PROJECT
-async function myProject(req, res) {
-  const query = `SELECT * FROM "Blogs"`;
+  if (isLogin === undefined) {
+    return res.redirect("login");
+  }
 
+  const query = `SELECT * FROM "Projects"`;
   const obj = await sequelize.query(query, { type: QueryTypes.SELECT });
 
-  res.render("myProject", { data: obj });
-}
-function viewproject(req, res) {
-  res.render("addProject");
+  // tambah properti untuk durasi
+  const projects = obj.map((item) => {
+    return {
+      ...item,
+      duration: getMonthDuration(item.start_date, item.end_date),
+    };
+  });
+
+  res.render("index", { projects, user, isLogin });
 }
 
 // ADD
-async function addBlog(req, res) {
-  const { title, content } = req.body;
+
+function addProjectForm(req, res) {
+  const isLogin = req.session.isLogin;
+  const user = req.session.user;
+
+  if (isLogin === undefined) {
+    return res.redirect("login");
+  }
+  res.render("addProject", { isLogin, user });
+}
+
+async function addProject(req, res) {
+  const { name, description, start_date, end_date } = req.body;
+  const technologies = req.body["tech[]"];
+  const technologiesArray = `{${technologies
+    .map((tech) => `"${tech}"`)
+    .join(",")}}`;
 
   const date = new Date();
   const dateString = date.toISOString().slice(0, 19).replace("T", " ");
 
-  const query = `INSERT INTO "Blogs" (title, content, "createdAt", "updatedAt") VALUES ('${title}', '${content}', '${dateString}', '${dateString}')`;
+  const query = `INSERT INTO "Projects" (name, start_date, end_date, description, technologies, image, "createdAt", "updatedAt")
+      VALUES ('${name}', '${start_date}', '${end_date}', '${description}', '${technologiesArray}', 'js-image.jpg', '${dateString}', '${dateString}')`;
 
   await sequelize.query(query, { type: QueryTypes.INSERT });
 
-  res.redirect("myProject");
+  res.redirect("/");
 }
 
-async function editProjectView(req, res) {
+// EDIT
+async function editProjectForm(req, res) {
   const { id } = req.params;
+  const isLogin = req.session.isLogin;
+  const user = req.session.user;
 
-  const query = `SELECT * FROM "Blogs" WHERE id=${id}`;
+  if (isLogin === undefined) {
+    return res.redirect("login");
+  }
+
+  const query = `SELECT * FROM "Projects" WHERE id=${id}`;
   const obj = await sequelize.query(query, { type: QueryTypes.SELECT });
 
-  res.render("editProject", { data: obj[0] }); // obj[0] data array pertama
+  const project = {
+    ...obj[0],
+    technologies: {
+      nodejs: obj[0].technologies.find((item) => item === "nodejs")
+        ? true
+        : false,
+      reactjs: obj[0].technologies.find((item) => item === "reactjs")
+        ? true
+        : false,
+      nextjs: obj[0].technologies.find((item) => item === "nextjs")
+        ? true
+        : false,
+      typescript: obj[0].technologies.find((item) => item === "typescript")
+        ? true
+        : false,
+    },
+  };
+
+  res.render("editProject", { project, isLogin, user });
 }
 
-// UPDATE PROJECT
 async function updateProject(req, res) {
-  const { title, content, id } = req.body;
+  const { id, name, start_date, end_date, description } = req.body;
+  const technologies = req.body["tech[]"];
+  const technologiesArray = `{${technologies
+    .map((tech) => `"${tech}"`)
+    .join(",")}}`;
 
   const date = new Date();
   const dateString = date.toISOString().slice(0, 19).replace("T", " ");
 
-  const query = `UPDATE "Blogs" SET title='${title}', content='${content}', "updatedAt"='${dateString}' WHERE id='${id}'`;
+  const query = `UPDATE "Projects" 
+    SET name='${name}', start_date='${start_date}', end_date='${end_date}', description='${description}', technologies='${technologiesArray}', image='js-image.jpg', "updatedAt"='${dateString}' 
+    WHERE id='${id}'`;
+
   await sequelize.query(query, { type: QueryTypes.UPDATE });
-  res.redirect("/myProject");
+  res.redirect("/");
 }
 
 // DELETE
+
 async function deleteProject(req, res) {
   const { id } = req.params;
 
-  const query = `DELETE FROM "Blogs" WHERE id=${id}`;
+  const query = `DELETE FROM "Projects" WHERE id=${id}`;
   await sequelize.query(query, { type: QueryTypes.DELETE });
 
-  res.redirect("/myProject");
+  res.redirect("/");
 }
 
-// DETAIL PROJECT
+// DETAIL
+
 async function detailProject(req, res) {
   const { id } = req.params;
+  const isLogin = req.session.isLogin;
+  const user = req.session.user;
 
-  const query = `SELECT * FROM "Blogs" WHERE id='${id}'`;
+  if (isLogin === undefined) {
+    return res.redirect("login");
+  }
+
+  const query = `SELECT * FROM "Projects" WHERE id='${id}'`;
   const obj = await sequelize.query(query, { type: QueryTypes.SELECT });
 
-  res.render("detailProject", { detail: obj[0] });
+  const detail = {
+    ...obj[0],
+    duration: getMonthDuration(obj[0].start_date, obj[0].end_date),
+  };
+
+  res.render("detailProject", { detail, isLogin, user });
 }
 
 // TESTIMONIAL
 function testimonial(req, res) {
+  const isLogin = req.session.isLogin;
+  const user = req.session.user;
+
+  if (isLogin === undefined) {
+    return res.redirect("login");
+  }
+
   const rating = parseInt(req.query.rating);
   let filteredTestimonials = testimonials;
 
@@ -204,19 +288,32 @@ function testimonial(req, res) {
     filteredTestimonials = testimonials.filter((t) => t.ratting === rating);
   }
 
-  res.render("testimonial", { testimonials: filteredTestimonials });
+  res.render("testimonial", {
+    testimonials: filteredTestimonials,
+    isLogin,
+    user,
+  });
 }
 
 // CONTACT
 function contact(req, res) {
-  res.render("contact");
-}
+  const isLogin = req.session.isLogin;
+  const user = req.session.user;
 
-function loginView(req, res) {
-  res.render("login-form");
+  res.render("contact", { isLogin, user });
 }
 
 // LOGIN
+function loginForm(req, res) {
+  const isLogin = req.session.isLogin;
+
+  if (isLogin) {
+    return res.redirect("/");
+  }
+
+  res.render("login-form");
+}
+
 async function login(req, res) {
   const { email, password } = req.body;
 
@@ -252,7 +349,14 @@ async function login(req, res) {
   });
 }
 
-function registerView(req, res) {
+// REGISTER
+function registerForm(req, res) {
+  const isLogin = req.session.isLogin;
+
+  if (isLogin) {
+    return res.redirect("/");
+  }
+
   res.render("register-form");
 }
 
@@ -263,10 +367,10 @@ async function register(req, res) {
   const query = `SELECT * FROM "Users" WHERE email='${email}'`;
   const obj = await sequelize.query(query, { type: QueryTypes.SELECT });
 
-  // if (obj[0].length === 1) {
-  //   req.flash("danger", "Register Failed: Email Already Use!");
-  //   return res.redirect("/register");
-  // }
+  if (obj.length === 1) {
+    req.flash("failed", "Register Failed: Email Already Use!");
+    return res.redirect("/register");
+  }
 
   bcrypt.hash(password, 10, async (err, hash) => {
     if (err) {
@@ -277,7 +381,10 @@ async function register(req, res) {
       return res.redirect("/register");
     }
 
-    const query = `INSERT INTO "Users"(name, email, password) VALUES ('${name}','${email}','${hash}')`;
+    const date = new Date();
+    const dateString = date.toISOString().slice(0, 19).replace("T", " ");
+
+    const query = `INSERT INTO "Users"(name, email, password, "createdAt", "updatedAt") VALUES ('${name}','${email}','${hash}','${dateString}','${dateString}')`;
     await sequelize.query(query, { type: QueryTypes.INSERT });
     req.flash("success", "Register Success!");
     res.redirect("/login");
