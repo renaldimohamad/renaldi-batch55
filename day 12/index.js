@@ -233,15 +233,13 @@ function deleteProject(req, res) {
 function detailProject(req, res) {
   const { id } = req.params;
 
-  // const data = {
-  //   id,
-  //   title,
-  //   content,
-  // };
+  const data = projects.find((item) => item.id === parseInt(id));
 
-  const detail = data[id];
+  const detail = {
+    ...data,
+    duration: getMonthDuration(data.start_date, data.end_date),
+  };
 
-  console.log("check :", detail);
   res.render("detailProject", { detail });
 }
 

@@ -164,79 +164,84 @@
       <div class="container">
         <div class="d-flex flex-wrap justify-content-center gap-3">
           {{#each projects}}
-            <div class="card border border-0 shadow-lg" style="width: 18rem">
-              <div class="container">
-                <img
-                  src="{{this.image}}"
-                  class="rounded"
-                  alt="project-image"
-                  style="width: 100%; margin-top: 12px;"
-                />
-              </div>
-              <div class="card-body container" style="padding: 12px">
-                <h5 class="mb-0">{{this.name}}</h5>
-                <p class="text-secondary" style="font-size: 14px;">Durasi:
-                  {{this.duration}}
-                  bulan</p>
-                <p class="lh-1.1" style="font-size: 14px">
-                  {{this.description}}
-                </p>
-
-                <!-- Icons -->
-
-                <div class="d-flex gap-3">
-                  {{#if this.technologies.length}}
-                    {{#each this.technologies}}
-                      <img
-                        src="./assets/Icons/{{this}}-icon.png"
-                        alt="tech-icon"
-                        style="width: 22px; height: 22px;"
-                      />
-                    {{/each}}
-                  {{else}}
-                    <span>-</span>
-                  {{/if}}
+            <a
+              href="/detailProject/{{this.id}}"
+              class="text-decoration-none text-color text-body"
+            >
+              <div class="card border border-0 shadow-lg" style="width: 18rem">
+                <div class="container">
+                  <img
+                    src="{{this.image}}"
+                    class="rounded"
+                    alt="project-image"
+                    style="width: 100%; margin-top: 12px;"
+                  />
                 </div>
-              </div>
+                <div class="card-body container" style="padding: 12px">
+                  <h5 class="mb-0">{{this.name}}</h5>
+                  <p class="text-secondary" style="font-size: 14px;">Durasi:
+                    {{this.duration}}
+                    bulan</p>
+                  <p class="lh-1.1" style="font-size: 14px">
+                    {{this.description}}
+                  </p>
 
-              <!-- Button -->
+                  <!-- Icons -->
 
-              <div class="container" style="padding: 12px;">
-                <div class="d-flex gap-2">
-                  <a href="/editProject/{{this.id}}">
-                    <button
-                      type="button"
-                      class="btn btn-dark"
-                      style="
+                  <div class="d-flex gap-3">
+                    {{#if this.technologies.length}}
+                      {{#each this.technologies}}
+                        <img
+                          src="./assets/Icons/{{this}}-icon.png"
+                          alt="tech-icon"
+                          style="width: 22px; height: 22px;"
+                        />
+                      {{/each}}
+                    {{else}}
+                      <span>-</span>
+                    {{/if}}
+                  </div>
+                </div>
+
+                <!-- Button -->
+
+                <div class="container" style="padding: 12px;">
+                  <div class="d-flex gap-2">
+                    <a href="/editProject/{{this.id}}">
+                      <button
+                        type="button"
+                        class="btn btn-dark"
+                        style="
                         --bs-btn-padding-y: 0.2rem;
                         --bs-btn-padding-x: 3rem;
                         --bs-btn-font-size: 0.75rem;
                       "
+                      >
+                        edit
+                      </button>
+                    </a>
+                    <form
+                      class="mb-0"
+                      action="/deleteProject/{{this.id}}"
+                      method="post"
                     >
-                      edit
-                    </button>
-                  </a>
-                  <form
-                    class="mb-0"
-                    action="/deleteProject/{{this.id}}"
-                    method="post"
-                  >
-                    <button
-                      type="submit"
-                      class="btn btn-dark"
-                      style="
+                      <button
+                        type="submit"
+                        class="btn btn-dark"
+                        style="
                       --bs-btn-padding-y: 0.2rem;
                       --bs-btn-padding-x: 3rem;
                       --bs-btn-font-size: 0.75rem;
                     "
-                    >
-                      delete
-                    </button>
-                  </form>
+                      >
+                        delete
+                      </button>
+                    </form>
 
+                  </div>
                 </div>
               </div>
-            </div>
+            </a>
           {{/each}}
         </div>
       </div>
