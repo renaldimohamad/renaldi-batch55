@@ -1,5 +1,5 @@
 body {
-  background-color: #e2e2e2;
+  background-color: rgb(230, 233, 238);
 }
 
 .custom-input:focus {
@@ -25,6 +25,7 @@ body {
 
 .custom-input[type="file"]::file-selector-button {
   background-color: rgb(230, 236, 230);
+
   color: gray;
   border-radius: 2px;
 }
