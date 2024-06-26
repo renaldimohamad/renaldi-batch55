@@ -1,10 +1,48 @@
 const express = require("express");
-const { sequelize } = require("sequelize");
-
 const path = require("path");
+
 const app = express();
 const port = 5000;
 
+const projects = [
+  {
+    id: 1,
+    name: "Dumbways Mobile App",
+    start_date: "2024-01-05",
+    end_date: "2024-02-08",
+    description:
+      "App that used for dumbways student, it was deployed and can downloaded on playstore. Happy Download.",
+    technologies: ["reactjs", "nodejs", "typescript"],
+    image: "./assets/Image/images.jpg",
+  },
+  {
+    id: 2,
+    name: "Dumbways Website",
+    start_date: "2024-02-09",
+    end_date: "2024-05-21",
+    description: "Web that used for dumbways student.",
+    technologies: ["nextjs", "nodejs", "typescript"],
+    image: "./assets/Image/images.jpg",
+  },
+  {
+    id: 3,
+    name: "Dumbways Website",
+    start_date: "2023-09-01",
+    end_date: "2023-12-28",
+    description: "Web that used for dumbways student.",
+    technologies: ["nextjs", "nodejs", "typescript"],
+    image: "./assets/Image/images.jpg",
+  },
+  {
+    id: 4,
+    name: "Dumbways Website",
+    start_date: "2024-02-05",
+    end_date: "2024-06-25",
+    description: "Web that used for dumbways student.",
+    technologies: ["nextjs", "nodejs", "typescript"],
+    image: "./assets/Image/images.jpg",
+  },
+];
 const data = [];
 const testimonials = [
   {
@@ -77,36 +115,119 @@ app.use("/assets", express.static(path.join(__dirname, "src/assets")));
 app.use(express.urlencoded({ extended: false }));
 
 app.get("/", home);
-app.get("/myProject", myProject);
-app.get("/addProject", viewproject);
-app.post("/addProject", addBlog);
+app.get("/addProject", addProjectForm);
+app.post("/addProject", addProject);
+app.get("/editProject/:id", editProjectForm);
+app.post("/updateProject", updateProject);
+app.post("/deleteProject/:id", deleteProject);
 app.get("/detailProject/:id", detailProject);
 app.get("/testimonial", testimonial);
 app.get("/contact", contact);
 
-// app.get("/updateProject/:id", editProjectView);
+function getMonthDuration(startDateStr, endDateStr) {
+  const startMonth = startDateStr.split("-")[1]; // ambil value bulan start
+  const endMonth = endDateStr.split("-")[1]; // ambil value bulan end
+
+  const totalMonth = endMonth - startMonth + 1;
+  return totalMonth;
+}
 
 function home(req, res) {
-  res.render("index");
+  const data = projects.map((item) => {
+    return {
+      ...item,
+      duration: getMonthDuration(item.start_date, item.end_date),
+    };
+  });
+
+  res.render("index", { projects: data });
 }
-function myProject(req, res) {
-  res.render("myProject", { data });
-}
-function viewproject(req, res) {
+
+function addProjectForm(req, res) {
   res.render("addProject");
 }
-function addBlog(req, res) {
-  const { title, content } = req.body;
 
-  console.log("title :", title);
-  console.log("content :", content);
+function addProject(req, res) {
+  const { name, description, start_date, end_date } = req.body;
+  const technologies = req.body["tech[]"];
 
-  const dataProject = { title, content };
+  let newId = 1;
 
-  const test = data.unshift(dataProject);
+  // jika array projects tidak kosong maka buat id berdasarkan id item terkahir pada array projects
+  if (projects.length !== 0) {
+    newId = projects.at(-1).id + 1;
+  }
 
-  res.redirect("myProject");
-  console.log(test);
+  const newProject = {
+    id: newId,
+    name,
+    description,
+    start_date,
+    end_date,
+    technologies,
+    image: "./assets/Image/images.jpg", // static image
+  };
+
+  projects.unshift(newProject);
+
+  res.redirect("/");
+}
+
+function editProjectForm(req, res) {
+  const { id } = req.params;
+
+  const editData = projects.find((item) => item.id === parseInt(id));
+
+  const project = {
+    ...editData,
+    technologies: {
+      nodejs: editData.technologies.find((item) => item === "nodejs")
+        ? true
+        : false,
+      reactjs: editData.technologies.find((item) => item === "reactjs")
+        ? true
+        : false,
+      nextjs: editData.technologies.find((item) => item === "nextjs")
+        ? true
+        : false,
+      typescript: editData.technologies.find((item) => item === "typescript")
+        ? true
+        : false,
+    },
+  };
+
+  res.render("updateProject", { project });
+}
+
+function updateProject(req, res) {
+  const { id, name, start_date, end_date, description, image } = req.body;
+  const technologies = req.body["tech[]"];
+
+  const updateProject = {
+    id,
+    name,
+    start_date,
+    end_date,
+    description,
+    technologies,
+    image: "./assets/Image/images.jpg", // static image
+  };
+
+  const tempProjects = projects.filter((item) => item.id !== parseInt(id)); // buat array baru tanpa item dengan id yang mau dihapus
+  tempProjects.unshift(updateProject);
+
+  projects.splice(0, projects.length, ...tempProjects);
+
+  res.redirect("/");
+}
+
+function deleteProject(req, res) {
+  const { id } = req.params;
+
+  const newData = projects.filter((item) => item.id !== parseInt(id)); // buat array baru tanpa item dengan id yang mau dihapus
+  projects.splice(0, projects.length, ...newData); // ganti array project dengan array baru
+
+  res.redirect("/");
 }
 
 function detailProject(req, res) {
@@ -124,20 +245,6 @@ function detailProject(req, res) {
   res.render("detailProject", { detail });
 }
 
-//detail project
-// function editProjectView(req, res) {
-//   const { id } = req.params;
-
-//   const dataFilter = data[parseInt(id)];
-//   dataFilter.id = parseInt(id);
-
-//   res.render("updateProject", { data: dataFilter });
-// }
-
-function detailProject(req, res) {
-  res.render("detailProject");
-}
-
 function testimonial(req, res) {
   const rating = parseInt(req.query.rating);
   let filteredTestimonials = testimonials;
@@ -148,9 +255,11 @@ function testimonial(req, res) {
 
   res.render("testimonial", { testimonials: filteredTestimonials });
 }
+
 function contact(req, res) {
   res.render("contact");
 }
+
 app.listen(port, function () {
   console.log(`Server berjalan di port ${port}`);
 });
