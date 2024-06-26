@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 const { Sequelize, QueryTypes } = require("sequelize");
 
 const config = require("./config/config.json");
@@ -67,8 +68,6 @@ const testimonials = [
   },
 ];
 
-const path = require("path");
-const { type } = require("os");
 const app = express();
 const port = 5000;
 
@@ -77,73 +76,114 @@ app.set("views", path.join(__dirname, "src/views"));
 
 app.use("/assets", express.static(path.join(__dirname, "src/assets")));
 app.use(express.urlencoded({ extended: false }));
-app.get("/", home);
-app.get("/myProject", myProject);
-app.get("/addProject", viewproject);
-app.post("/addProject", addBlog);
-app.get("/detailProject/:id", detailProject);
 
-app.get("/updateProject/:id", editProjectView);
+// Routes
+app.get("/", home);
+app.get("/addProject", addProjectForm);
+app.post("/addProject", addProject);
+// app.get("/addProject", viewproject);
+app.get("/editProject/:id", editProjectForm);
+// app.get("/updateProject/:id", editProjectView);
+app.get("/detailProject/:id", detailProject);
 app.post("/updateProject", updateProject);
 app.post("/deleteProject/:id", deleteProject);
-
 app.get("/testimonial", testimonial);
 app.get("/contact", contact);
 
+function getMonthDuration(startDateStr, endDateStr) {
+  const startMonth = startDateStr.split("-")[1]; // ambil value bulan start
+  const endMonth = endDateStr.split("-")[1]; // ambil value bulan end
+
+  const totalMonth = endMonth - startMonth + 1;
+  return totalMonth;
+}
+
 // HOME
 
-function home(req, res) {
-  res.render("index");
-}
-
-// MY PROJECT
-
-async function myProject(req, res) {
-  const query = `SELECT * FROM "Blogs"`;
-
+async function home(req, res) {
+  const query = `SELECT * FROM "Projects"`;
   const obj = await sequelize.query(query, { type: QueryTypes.SELECT });
 
-  res.render("myProject", { data: obj });
-}
-function viewproject(req, res) {
-  res.render("addProject");
+  // tambah properti untuk durasi
+  const projects = obj.map((item) => {
+    return {
+      ...item,
+      duration: getMonthDuration(item.start_date, item.end_date),
+    };
+  });
+
+  res.render("index", { projects });
 }
 
 // ADD
 
-async function addBlog(req, res) {
-  const { title, content } = req.body;
+function addProjectForm(req, res) {
+  res.render("addProject");
+}
+
+async function addProject(req, res) {
+  const { name, description, start_date, end_date } = req.body;
+  const technologies = req.body["tech[]"];
+  const technologiesArray = `{${technologies
+    .map((tech) => `"${tech}"`)
+    .join(",")}}`;
 
   const date = new Date();
   const dateString = date.toISOString().slice(0, 19).replace("T", " ");
 
-  const query = `INSERT INTO "Blogs" (title, content, "createdAt", "updatedAt") VALUES ('${title}', '${content}', '${dateString}', '${dateString}')`;
+  const query = `INSERT INTO "Projects" (name, start_date, end_date, description, technologies, image, "createdAt", "updatedAt")
+      VALUES ('${name}', '${start_date}', '${end_date}', '${description}', '${technologiesArray}', 'js-image.jpg', '${dateString}', '${dateString}')`;
 
   await sequelize.query(query, { type: QueryTypes.INSERT });
 
-  res.redirect("myProject");
-}
-
-async function editProjectView(req, res) {
-  const { id } = req.params;
-
-  const query = `SELECT * FROM "Blogs" WHERE id=${id}`;
-  const obj = await sequelize.query(query, { type: QueryTypes.SELECT });
-
-  res.render("editProject", { data: obj[0] }); // obj[0] data array pertama
+  res.redirect("/");
 }
 
 // UPDATE PROJECT
 
+async function editProjectForm(req, res) {
+  const { id } = req.params;
+
+  const query = `SELECT * FROM "Projects" WHERE id=${id}`;
+  const obj = await sequelize.query(query, { type: QueryTypes.SELECT });
+
+  const project = {
+    ...obj[0],
+    technologies: {
+      nodejs: obj[0].technologies.find((item) => item === "nodejs")
+        ? true
+        : false,
+      reactjs: obj[0].technologies.find((item) => item === "reactjs")
+        ? true
+        : false,
+      nextjs: obj[0].technologies.find((item) => item === "nextjs")
+        ? true
+        : false,
+      typescript: obj[0].technologies.find((item) => item === "typescript")
+        ? true
+        : false,
+    },
+  };
+
+  res.render("editProject", { project });
+}
+
 async function updateProject(req, res) {
-  const { title, content, id } = req.body;
+  const { id, name, start_date, end_date, description } = req.body;
+  const technologies = req.body["tech[]"];
+  const technologiesArray = `{${technologies
+    .map((tech) => `"${tech}"`)
+    .join(",")}}`;
 
   const date = new Date();
   const dateString = date.toISOString().slice(0, 19).replace("T", " ");
 
-  const query = `UPDATE "Blogs" SET title='${title}', content='${content}', "updatedAt"='${dateString}' WHERE id='${id}'`;
+  const query = `UPDATE "Projects" 
+    SET name='${name}', start_date='${start_date}', end_date='${end_date}', description='${description}', technologies='${technologiesArray}', image='js-image.jpg', "updatedAt"='${dateString}' 
+    WHERE id='${id}'`;
+
   await sequelize.query(query, { type: QueryTypes.UPDATE });
-  res.redirect("/myProject");
+  res.redirect("/");
 }
 
 // DELETE
@@ -151,10 +191,10 @@ async function updateProject(req, res) {
 async function deleteProject(req, res) {
   const { id } = req.params;
 
-  const query = `DELETE FROM "Blogs" WHERE id=${id}`;
+  const query = `DELETE FROM "Projects" WHERE id=${id}`;
   await sequelize.query(query, { type: QueryTypes.DELETE });
 
-  res.redirect("/myProject");
+  res.redirect("/");
 }
 
 // DETAIL PROJECT
@@ -162,10 +202,15 @@ async function deleteProject(req, res) {
 async function detailProject(req, res) {
   const { id } = req.params;
 
-  const query = `SELECT * FROM "Blogs" WHERE id='${id}'`;
+  const query = `SELECT * FROM "Projects" WHERE id='${id}'`;
   const obj = await sequelize.query(query, { type: QueryTypes.SELECT });
 
-  res.render("detailProject", { detail: obj[0] });
+  const detail = {
+    ...obj[0],
+    duration: getMonthDuration(obj[0].start_date, obj[0].end_date),
+  };
+
+  res.render("detailProject", { detail });
 }
 
 // TESTIMONIAL
