@@ -2,37 +2,27 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Home</title>
+    <title>Add Project</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
     <link rel="stylesheet" href="./assets/Css/myProject.css" />
-    <!-- <link rel="stylesheet" href="./assets/Css/contact.css" /> -->
   </head>
   <body>
-    <nav
-      class="navbar navbar-expand-lg"
-      style="background-color: #f5f3f3; margin-top: 5px"
-    >
+    <nav class="navbar navbar-expand-lg" style="background-color: #f5f3f3;">
       <div class="container-fluid">
-        <img
-          class="me-3"
-          src="./assets/Image/download.png"
-          style="width: 40px; margin-left: 2rem"
-          alt=""
-        />
+        <a href="/">
+          <img
+            src="./assets/Image/download.png"
+            style="width: 40px; margin-right: 12px; margin-left: 30px"
+            alt="logo"
+          />
+        </a>
         <a
-          href="contact.html"
+          href="/contact"
           class="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
@@ -44,24 +34,33 @@
           <span class="navbar-toggler-icon"></span>
         </a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link nav-item me-2" href="/">Home</a>
+              <a class="nav-link" href="/">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link nav-item me-2 fw-bold" href="/myProject">Add
-                Projoect</a>
+              <a class="nav-link fw-bold" href="/addProject">Add Projoect</a>
             </li>
             <li class="nav-item">
-              <a
-                class="nav-link nav-item me-2"
-                href="/testimonial"
-              >Testimonials</a>
+              <a class="nav-link" href="/testimonial">Testimonials</a>
             </li>
           </ul>
 
+          {{#if isLogin}}
+            <div class="d-flex align-items-center mb-lg-0 mb-3">
+              <p
+                class="nav-link nav-item me-2 fw-semibold lh-1 fst-italic mb-0"
+              >Welcome,
+                {{user.name}}</p>
+              <a
+                href="/logout"
+                class="me-4 link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+              >Logout</a>
+            </div>
+          {{/if}}
+
           <a href="/contact">
-            <button class="btn btn-dark text-light me-4" type="submit">
+            <button class="btn btn-dark text-light" type="button">
               Contact Me
             </button>
           </a>
@@ -82,15 +81,16 @@
           >
             <div class="mb-3">
               <label
-                for="exampleFormControlInput1"
+                for="input-add-project-name"
                 class="form-label fw-bold mb-0"
               >Project Name</label>
               <input
                 type="text"
                 class="form-control custom-input"
                 style="outline: white"
-                id="inputName"
-                name="title"
+                id="input-add-project-name"
+                name="name"
+                required
               />
             </div>
 
@@ -98,14 +98,16 @@
               <div class="col-6">
                 <div>
                   <label
-                    for="exampleFormControlInput1"
+                    for="input-add-project-start-date"
                     class="form-label fw-bold mb-0"
                   >Start Date</label>
                   <input
                     type="date"
                     class="form-control custom-input"
                     style="outline: white"
-                    id="startDate"
+                    id="input-add-project-start-date"
+                    name="start_date"
+                    required
                   />
                 </div>
               </div>
@@ -113,14 +115,16 @@
               <div class="col-6">
                 <div class="mb-3">
                   <label
-                    for="exampleFormControlInput1"
+                    for="input-add-project-end-date"
                     class="form-label fw-bold mb-0"
                   >End date</label>
                   <input
                     type="date"
                     class="form-control custom-input"
                     style="outline: white"
-                    id="endDate"
+                    id="input-add-project-end-date"
+                    name="end_date"
+                    required
                   />
                 </div>
               </div>
@@ -128,20 +132,21 @@
 
             <div class="mb-3">
               <label
-                for="exampleFormControlTextarea1"
+                for="input-add-project-message"
                 class="form-label fw-bold mb-0"
               >Your Message</label>
               <textarea
                 class="form-control custom-input"
                 style="resize: none"
-                id="inputDescription"
-                name="content"
+                id="input-add-project-message"
+                name="description"
                 rows="3"
+                required
               ></textarea>
             </div>
 
             <label
-              for="exampleFormControlTextarea1"
+              for="input-add-project-techs"
               class="form-label fw-bold mb-0"
             >Technologies</label>
             <div style="display: flex; flex-direction: row">
@@ -149,20 +154,28 @@
                 <input
                   class="form-check-input"
                   type="checkbox"
-                  id="nodeJs"
-                  name="tech"
+                  id="checkbox-add-project-nodejs"
+                  name="tech[]"
+                  value="nodejs"
                 />
-                <label class="form-check-label" for="flexCheckDefault">Node Js</label>
+                <label
+                  class="form-check-label"
+                  for="checkbox-add-project-nodejs"
+                >Node Js</label>
               </div>
 
               <div class="form-check" style="width: 150px">
                 <input
                   class="form-check-input"
                   type="checkbox"
-                  id="reactJs"
-                  name="tech"
+                  id="checkbox-add-project-reactjs"
+                  name="tech[]"
+                  value="reactjs"
                 />
-                <label class="form-check-label" for="flexCheckDefault">React Js</label>
+                <label
+                  class="form-check-label"
+                  for="checkbox-add-project-reactjs"
+                >React Js</label>
               </div>
             </div>
 
@@ -174,38 +187,46 @@
                 <input
                   class="form-check-input"
                   type="checkbox"
-                  id="nextJs"
-                  name="tech"
+                  id="checkbox-add-project-nextjs"
+                  name="tech[]"
+                  value="nextjs"
                 />
-                <label class="form-check-label" for="flexCheckDefault">Next Js</label>
+                <label
+                  class="form-check-label"
+                  for="checkbox-add-project-nextjs"
+                >Next Js</label>
               </div>
 
               <div class="form-check" style="width: 150px">
                 <input
                   class="form-check-input"
                   type="checkbox"
-                  id="phython"
-                  name="tech"
+                  id="checkbox-add-project-typescript"
+                  name="tech[]"
+                  value="typescript"
                 />
-                <label class="form-check-label" for="flexCheckDefault">Type
-                  Script</label>
+                <label
+                  class="form-check-label"
+                  for="checkbox-add-project-typescript"
+                >Type Script</label>
               </div>
             </div>
 
             <div class="mb-3">
               <label
-                for="exampleFormControlInput1"
+                for="add-project-upload-image"
                 class="form-label fw-bold mb-0"
               >Upload Image</label>
               <input
+                id="add-project-upload-image"
                 class="form-control custom-input"
                 type="file"
-                id="inputImage"
                 name="image"
+                required
               />
             </div>
 
-            <div class="col-auto d-flex justify-content-end">
+            <div class="mt-4 col-auto d-flex justify-content-end">
               <form class="d-flex">
                 <button
                   class="btn btn-dark text-light"
@@ -218,13 +239,6 @@
             </div>
           </form>
         </div>
-      </div>
-    </div>
-
-    <div class="new-project">
-      <hr />
-
-      <div class="html-content" id="contens">
       </div>
     </div>
 
