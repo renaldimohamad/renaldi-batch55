@@ -1,0 +1,180 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bootstrap demo</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./assets/Css/myProject.css" />
+  </head>
+  <body>
+    <nav
+      class="navbar navbar-expand-lg"
+      style="background-color: #f5f3f3; margin-top: 5px"
+    >
+      <div class="container-fluid">
+        <img
+          src="./assets/Image/download.png"
+          style="width: 40px; margin-right: 12px; margin-left: 30px"
+          alt=""
+        />
+        <a
+          href="contact.html"
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link fw-bold" href="/myProject">Add Projoect</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/testimonial">Testimonials</a>
+            </li>
+          </ul>
+          <a href="/contact">
+            <button class="btn btn-dark text-light me-4" type="submit">
+              Contact Me
+            </button>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container d-flex flex-column mt-5" id="myProject">
+      <div class="d-flex justify-content-end mb-4">
+        <a href="/addProject" class="btn btn-dark text-light">Add Project</a>
+      </div>
+
+      {{! CARD }}
+
+      <div class="container d-flex gap-4 pb-5 px-5" style="flex-wrap: wrap;">
+        {{#if data.length}}
+          {{#each data}}
+            <div class="">
+
+              <div class="col d-flex gap-5">
+                <div
+                  class="card border border-0 shadow-lg"
+                  style="width: 18rem"
+                >
+                  <div class="container">
+                    <img
+                      src="/uploads/{{this.image}}"
+                      class="rounded"
+                      alt="project-item-image"
+                      style="width: 100%; margin-top: 10px"
+                    />
+                  </div>
+                  <a
+                    href="/detailProject/{{this.id}}"
+                    target="_blank"
+                    {{this.title}}
+                    class="card-body p-2 container"
+                    style="text-decoration: none;"
+                  >
+                    <h5 class="mb-0">{{this.title}}</h5>
+                    <p>{{this.id}}
+                      |
+                      <span id="time">{{this.createdAt}} |</span>
+                      bulan</p>
+                    <p class="lh-1.1" style="font-size: 13px">
+                      {{this.content}}
+                    </p>
+                  </a>
+
+                  <!-- Icons -->
+
+                  <div class="container mb-3">
+                    <div class="d-flex gap-3">
+                      <i class="fa-brands fa-google-play"></i>
+                      <i class="fa-brands fa-android"></i>
+                      <i class="fa-brands fa-java"></i>
+                    </div>
+                  </div>
+
+                  <!-- Button -->
+
+                  <div class="container">
+                    <div class="d-flex gap-2">
+                      <form action="" method="GET">
+                        <button
+                          type="submit"
+                          class="btn btn-dark"
+                          style="
+                          --bs-btn-padding-x: 3rem;
+                          --bs-btn-font-size: 0.75rem;
+                        "
+                        >
+                          edit
+                        </button>
+                      </form>
+
+                      <form action="/deleteProject/{{this.id}}" method="POST">
+                        <button
+                          type="submit"
+                          class="btn btn-dark"
+                          style="
+
+                          --bs-btn-padding-x: 2.5rem;
+                          --bs-btn-font-size: 0.75rem;
+                        "
+                        >
+                          delete
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          {{/each}}
+
+        {{else}}
+          <h2 class="text-center flex-fill mt-5">No Data</h2>
+        {{/if}}
+      </div>
+    </div>
+
+    <script src="./assets/Js/myProject.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      var duration = document.querySelectorAll('#time')
+      duration.forEach(function(duration) { var origin =
+      duration.textContent.trim() var date = new Date (origin) var option = {
+      weekday: 'long', day : 'numeric', month: 'long', year: 'numeric', hour:
+      'humeric', minute: 'numeric', second: 'numeric', timeZoneName: 'short'}
+      var formateDate = date.toLocaleDateString('id-ID', option)
+      duration.textContent = formateDate })
+    </script>
+  </body>
+
+</html>

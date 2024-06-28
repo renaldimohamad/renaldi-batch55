@@ -1,0 +1,116 @@
+body {
+  background-color: rgb(230, 233, 238);
+}
+
+.custom-input:focus {
+  box-shadow: 0px 1px 3px #beb8b8;
+  border: none;
+}
+
+.btn.btn-outline-success.btn-dark.text-light:hover {
+  color: inherit;
+  background-color: black;
+  border-color: black;
+}
+
+.custom-input {
+  border: solid 0.1px rgb(182, 178, 178);
+  border-radius: 2px white;
+  box-shadow: 0px 2px 5px rgb(182, 178, 178);
+}
+
+.custom-input[type="file"] {
+  color: white;
+}
+
+.custom-input[type="file"]::file-selector-button {
+  background-color: rgb(230, 236, 230);
+
+  color: gray;
+  border-radius: 2px;
+}
+
+.btn {
+  font-size: 16px;
+  text-align: center;
+  background-color: rgb(19, 29, 46);
+}
+
+.new-project {
+  background-color: white;
+}
+
+.new-project hr {
+  margin-top: 100px;
+  background-color: white;
+  border: none;
+}
+
+.new-project h1 {
+  font-size: 15px;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.html-content {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.content {
+  border: solid 1px white;
+  box-shadow: 0px 5px 3px #999;
+  width: 300px;
+}
+
+.content img {
+  margin-top: 10px;
+  border-radius: 7px;
+  width: 275px;
+  height: 160px;
+  margin-left: 12px;
+}
+
+.title-content {
+  font-weight: bold;
+}
+
+.content p {
+  font-size: 15px;
+  margin-left: 15px;
+}
+
+.duration-date {
+  color: rgb(87, 84, 82);
+  font-size: 15px;
+  margin-left: 15px;
+}
+
+.text-style {
+  margin-left: 15px;
+}
+
+.btn-content {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.button-style {
+  background-color: black;
+  color: white;
+  width: 120px;
+  border-radius: 5px;
+  border: black;
+  margin-bottom: 10px;
+  background-color: rgb(12, 20, 34);
+  padding: 1px;
+  margin-left: 18px;
+}

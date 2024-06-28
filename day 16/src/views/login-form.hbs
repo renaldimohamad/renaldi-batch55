@@ -1,0 +1,164 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Login</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./assets/Css/login.css" />
+    <!-- <link rel="stylesheet" href="./assets/Css/contact.css" /> -->
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg" style="background-color: #f5f3f3;">
+      <div class="container-fluid">
+        <a href="/">
+          <img
+            src="./assets/Image/download.png"
+            style="width: 40px; margin-right: 12px; margin-left: 30px"
+            alt="logo"
+          />
+        </a>
+        <a
+          href="contact.html"
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          </ul>
+
+          {{#if isLogin}}
+            <p>Welcome, {{user.name}}</p>
+            <a href="/logout"><button
+                class="btn btn-danger me-2"
+              >Logout</button></a>
+
+          {{else}}
+            <a href="/login" class="nav-link nav-item me-3 fw-bold">Login</a>
+            <a
+              href="/register"
+              class="nav-link nav-item me-3 fw-bold"
+            >Register</a>
+          {{/if}}
+          <a href="/contact">
+            <button class="btn btn-dark text-light me-4" type="submit">
+              Contact Me
+            </button>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row justify-content-center">
+        <h4
+          class="row justify-content-center fw-bold mb-4"
+          style="margin-top: 80px"
+        >
+          LOGIN TO YOUR ACCOUNT
+        </h4>
+
+        <div class="col-md-5">
+          {{#if messages.success}}
+            <div
+              class="alert alert-success alert-dismissible fade show"
+              role="alert"
+            >
+              <div class="container">
+                {{messages.success}}
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="alert"
+                  aria-label="Close"
+                ></button>
+              </div>
+            </div>
+          {{/if}}
+
+          {{#if messages.danger}}
+            <div
+              class="alert alert-danger alert-dismissible fade show"
+              role="alert"
+            >
+              <div class="container">
+                {{messages.danger}}
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="alert"
+                  aria-label="Close"
+                ></button>
+              </div>
+            </div>
+          {{/if}}
+
+          <form action="/login" method="POST">
+            <div class="mb-3">
+              <label for="email" class="form-label fw-bold mb-1">Email</label>
+              <input
+                type="email"
+                class="form-control custom-input"
+                style="outline: white"
+                name="email"
+                id="email"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label
+                for="password"
+                class="form-label fw-bold mb-1"
+              >Password</label>
+              <input
+                type="password"
+                class="form-control custom-input"
+                style="outline: white"
+                name="password"
+                id="password"
+                required
+              />
+            </div>
+
+            <div class="col-auto d-flex justify-content-end">
+              <div class="d-flex">
+                <button
+                  class="btn btn-dark text-light"
+                  style="border-radius: 30px; padding: 3px; width: 100px"
+                  type="submit"
+                >
+                  Submit
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="./assets/Js/login.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
