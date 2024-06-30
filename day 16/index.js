@@ -42,7 +42,7 @@ const testimonials = [
   {
     image:
       "https://images.pexels.com/photos/1036627/pexels-photo-1036627.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    contens: "Ayo jelajahi dunia, topi bulatku akan menuntun langkahku",
+    contens: "Let's explore the world, my bowler hat will guide my steps",
     author: "Garrett Hart",
     ratting: 3,
   },

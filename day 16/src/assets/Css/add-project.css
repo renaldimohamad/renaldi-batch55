@@ -2,11 +2,6 @@ body {
   background-color: rgb(230, 233, 238);
 }
 
-.custom-input:focus {
-  box-shadow: 0px 1px 3px #beb8b8;
-  border: none;
-}
-
 .btn.btn-outline-success.btn-dark.text-light:hover {
   color: inherit;
   background-color: black;
@@ -113,4 +108,34 @@ body {
   background-color: rgb(12, 20, 34);
   padding: 1px;
   margin-left: 18px;
+}
+
+@media (max-width: 850px) {
+  .navbar-toggler {
+    border: none;
+    box-shadow: none;
+  }
+
+  .sidebar {
+    background-color: #9999;
+    margin-top: 10px;
+  }
+
+  .sidebar a {
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+  }
+
+  .sidebar button {
+    margin-bottom: 12px;
+  }
+
+  #test a {
+    display: none;
+  }
+
+  #test p {
+    display: none;
+  }
 }

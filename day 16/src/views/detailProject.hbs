@@ -16,9 +16,10 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+
   </head>
 
-  <body>
+  <body style="background-color: rgb(230, 233, 238);">
     <nav class="navbar navbar-expand-lg" style="background-color: #f5f3f3;">
       <div class="container-fluid">
         <a href="/">
@@ -67,7 +68,7 @@
           {{/if}}
 
           <a href="/contact">
-            <button class="btn btn-dark text-light" type="button">
+            <button class="btn btn-dark text-light me-4" type="button">
               Contact Me
             </button>
           </a>
@@ -76,8 +77,8 @@
     </nav>
 
     <div class="container mt-4 px-5">
-      <h1 class="text-center">{{detail.name}}</h1>
-      <div class="row mt-5">
+      <h1 class="text-center fs-4 fw-bold">{{detail.name}}</h1>
+      <div class="row mt-4">
         <div class="col-lg-6">
           <img
             {{! src="../assets/Image/images.jpg" }}
@@ -90,10 +91,10 @@
         <div class="col-lg-6 pt-lg-0 pt-4 px-lg-5">
           {{! Section 1 - Duration }}
           <div>
-            <h2 class="mb-3">
+            <h2 class="mb-2 fs-6 fw-bold">
               Duration
             </h2>
-            <div class="d-flex align-items-center gap-2 mb-3">
+            <div class="d-flex align-items-center gap-2 mb-2">
               <i class="fa-solid fa-calendar-days"></i>
               <span>{{detail.start_date}} - {{detail.end_date}}</span>
             </div>
@@ -105,7 +106,7 @@
 
           <!-- Section 2 -Technologies -->
           <div class="mt-4">
-            <h2 class="mb-3">
+            <h2 class="mb-3 fs-6 fw-bold">
               Technologies
             </h2>
             <div class="d-flex gap-3">
@@ -114,7 +115,7 @@
                   <img
                     src="../assets/Icons/{{this}}-icon.png"
                     alt="tech-icon"
-                    style="width: 32px; height: 32px;"
+                    style="width: 20px; height: 20px;"
                   />
                 {{/each}}
               {{else}}
@@ -148,6 +149,6 @@
       var formateDate = date.toLocaleDateString('id-ID', option)
       duration.textContent = formateDate })
     </script>
-  </body>
 
+  </body>
 </html>

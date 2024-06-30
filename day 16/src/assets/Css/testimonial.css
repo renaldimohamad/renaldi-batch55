@@ -1,3 +1,39 @@
 body {
   background-color: rgb(230, 233, 238);
 }
+
+@media (max-width: 850px) {
+  .navbar-toggler {
+    border: none;
+    box-shadow: none;
+  }
+
+  .sidebar {
+    background-color: #9999;
+    margin-top: 10px;
+  }
+
+  .sidebar a {
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+  }
+
+  .sidebar button {
+    margin-bottom: 12px;
+  }
+
+  #test a {
+    display: none;
+  }
+
+  #test p {
+    display: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .container button {
+    font-size: 10px;
+  }
+}

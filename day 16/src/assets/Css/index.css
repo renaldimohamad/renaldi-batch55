@@ -1,3 +1,52 @@
 body {
   background-color: rgb(230, 233, 238);
 }
+
+@media (max-width: 850px) {
+  .navbar-toggler {
+    border: none;
+    box-shadow: none;
+  }
+
+  .sidebar {
+    background-color: #9999;
+    margin-top: 10px;
+  }
+
+  .sidebar a {
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+  }
+
+  .sidebar button {
+    margin-bottom: 12px;
+  }
+
+  #test a {
+    display: none;
+  }
+
+  #test p {
+    display: none;
+  }
+}
+
+@media (max-width: 380px) {
+  .btn-custom {
+    display: flex;
+    justify-content: center;
+  }
+
+  .btn-custom button {
+    padding-right: 1.8rem;
+    padding-left: 1.8rem;
+  }
+}
+
+@media (max-width: 310px) {
+  .btn-custom button {
+    padding-right: 1.2rem;
+    padding-left: 1.2rem;
+  }
+}

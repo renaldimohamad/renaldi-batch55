@@ -40,7 +40,10 @@
         >
           <span class="navbar-toggler-icon"></span>
         </a>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div
+          class="sidebar collapse navbar-collapse"
+          id="navbarSupportedContent"
+        >
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
               <a class="nav-link fw-bold" href="/">Home</a>
@@ -48,13 +51,13 @@
             <li class="nav-item">
               <a class="nav-link" href="/addProject">Add Projoect</a>
             </li>
-            <li class="nav-item">
+            <li class="test nav-item">
               <a class="nav-link" href="/testimonial">Testimonials</a>
             </li>
           </ul>
 
           {{#if isLogin}}
-            <div class="d-flex align-items-center mb-lg-0 mb-3">
+            <div class="d-flex align-items-center mb-lg-0" id="test">
               <p
                 class="nav-link nav-item me-2 fw-semibold lh-1 fst-italic mb-0"
               >Welcome,
@@ -62,16 +65,18 @@
               <a
                 href="/logout"
                 class="me-4 link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                id="logout"
               >Logout</a>
             </div>
           {{/if}}
 
-          <a href="/contact">
+          <a href="/contact" class="btn-contact">
             <button class="btn btn-dark text-light" type="button">
               Contact Me
             </button>
           </a>
         </div>
+
       </div>
     </nav>
 
@@ -177,14 +182,15 @@
 
       <!-- card -->
 
-      <div class="container">
+      <div class="container" id="card-custom">
+
         <div class="d-flex flex-wrap justify-content-center gap-3">
           {{#each projects}}
             <a
               href="/detailProject/{{this.id}}"
               class="text-decoration-none text-color text-body"
             >
-              <div class="card border border-0 shadow-lg" style="width: 18rem">
+              <div class="card border border-0 shadow-lg" style="width: 18rem;">
                 <div class="container">
                   <img
                     {{!-- src="./assets/Image/{{this.image}}" --}}
@@ -195,11 +201,11 @@
                   />
                 </div>
                 <div class="card-body container" style="padding: 12px">
-                  <h5 class="mb-0">{{this.name}}</h5>
-                  <p class="text-secondary" style="font-size: 14px;">Durasi:
+                  <h6 class="mb-0">{{this.name}}</h6>
+                  <p class="text-secondary" style="font-size: 12px;">Durasi:
                     {{this.duration}}
                     bulan</p>
-                  <p class="lh-1.1" style="font-size: 14px">
+                  <p class="lh-1.1" style="font-size: 12px">
                     {{this.description}}
                   </p>
 
@@ -222,12 +228,13 @@
 
                 <!-- Button -->
 
-                <div class="container" style="padding: 12px;">
-                  <div class="d-flex gap-2">
+                <div class="btn-custom container" style="padding: 12px; ">
+                  <div class="d-flex justify-content-center gap-1">
                     <a href="/editProject/{{this.id}}">
                       <button
                         type="button"
-                        class="btn btn-dark"
+                        class="btn btn-dark btn-sm"
+                        !
                         style="
                         --bs-btn-padding-y: 0.2rem;
                         --bs-btn-padding-x: 3rem;
